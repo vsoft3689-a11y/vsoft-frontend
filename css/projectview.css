@@ -43,9 +43,9 @@
 .mtech { background-color: #17a2b8; }
 .mba { background-color: #f53fa9; }
 .mca { background-color: #fd7e14; }
-.internship { background-color: #dc3545; }
-.register-btn { background-color: #6f42c1; }
-
+.internship { background-color: hsl(354, 70%, 54%); }
+.login-btn { background-color: #6f42c1; }
+.login-btn { background-color: #6f42c1; }
 @media (max-width: 992px) {
   .navbar-nav {
     gap: 5px;
