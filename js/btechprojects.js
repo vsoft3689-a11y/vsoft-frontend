@@ -30,7 +30,7 @@ function handleLogin(userData) {
 // Logout functionality
 logoutBtn.addEventListener("click", async () => {
   try {
-    const res = await fetch("https://vsoft.onrender.com/auth/logout", {
+    const res = await fetch("https://vsoft-backend-h5qj.onrender.com/auth/logout", {
       method: "POST",
       credentials: "include",
     });

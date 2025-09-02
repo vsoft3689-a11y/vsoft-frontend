@@ -6,7 +6,7 @@ form.addEventListener("submit", async (e) => {
   const formdata = Object.fromEntries(new FormData(form));
 
   try {
-    const res = await fetch("https://vsoft.onrender.com/auth/register", {
+    const res = await fetch("https://vsoft-backend-h5qj.onrender.com/auth/register", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       credentials: "include",

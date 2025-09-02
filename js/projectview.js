@@ -7,7 +7,7 @@ const domain = params.get('domain');
 document.getElementById('title').textContent = `${degree} ${branch} ${type} - ${domain} Projects`;
 
 async function getProjects() {
-  let response = await fetch(`https://vsoft.onrender.com/api/projects/${degree}/${branch}/${type}/${domain}`);
+  let response = await fetch(`https://vsoft-backend-h5qj.onrender.com/api/projects/${degree}/${branch}/${type}/${domain}`);
   let data = await response.json();
 
   let table = document.createElement("table");
@@ -67,7 +67,7 @@ if (exists) {
 
 logout.addEventListener("click", async () => {
   try {
-    const res = await fetch("https://vsoft.onrender.com/auth/logout", {
+    const res = await fetch("https://vsoft-backend-h5qj.onrender.com/auth/logout", {
       method: "POST",
       credentials: "include",
     });
