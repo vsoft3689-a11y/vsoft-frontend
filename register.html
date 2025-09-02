@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Register</title>
+    <link rel="stylesheet" href="./css/register.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h2>User Registration</h2>
+      <form id="regForm">
+        <label>Full Name:</label>
+        <input type="text" name="fullName" required />
+
+        <label>Email:</label>
+        <input type="email" name="email" required />
+
+        <label>Phone:</label>
+        <input type="text" name="phone" required />
+
+        <label>Degree:</label>
+        <input type="text" name="degree" required />
+
+        <label>Password:</label>
+        <input type="password" name="password" required />
+
+        <button type="submit">Register</button>
+      </form>
+
+      <p>Already Registered? <a href="./login.html">Login here</a></p>
+      <p id="msg"></p>
+    </div>
+
+    <script src="./js/register.js"></script>
+  </body>
+</html>
