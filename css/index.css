@@ -43,6 +43,8 @@ body {
 .mba { background-color: #f53fa9; }
 .mca { background-color: #fd7e14; }
 .internship { background-color: #dc3545; }
+.login-btn { background-color: #6f42c1; }
+
 
 /* Buttons */
 .login-btn, .register-btn, .logout-btn { background-color: #6f42c1; }

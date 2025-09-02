@@ -1,34 +1,54 @@
-// Logout functionality
-const registerbtn = document.querySelector(".register-btn");
-const loginbtn = document.querySelector(".login-btn");
-const logout = document.querySelector(".logout");
+// Select elements
+const loginBtn = document.querySelector(".login-btn");
+const logoutBtn = document.querySelector(".logout");
 
-let exists = localStorage.getItem("isLoggedIn");
+// Check login status on page load
+function checkLoginStatus() {
+  const isLoggedIn = localStorage.getItem("isLoggedIn");
 
-if (exists) {
-    registerbtn.style.display = "none";
-    loginbtn.style.display = "none";
-    logout.style.display = "block";
+  if (isLoggedIn) {
+    // User logged in
+    loginBtn.style.display = "none";
+    logoutBtn.style.display = "block";
+  } else {
+    // User logged out
+    loginBtn.style.display = "block";
+    logoutBtn.style.display = "none";
+  }
+}
+checkLoginStatus();
+
+// Call this after successful login API response
+function handleLogin(userData) {
+  localStorage.setItem("isLoggedIn", "true");
+  localStorage.setItem("user", JSON.stringify(userData));
+
+  // Redirect to home page after login
+  window.location.href = "index.html";
 }
 
-logout.addEventListener("click", async () => {
-    try {
-        const res = await fetch("https://vsoft.onrender.com/auth/logout", {
-            method: "POST",
-            credentials: "include",
-        });
+// Logout functionality
+logoutBtn.addEventListener("click", async () => {
+  try {
+    const res = await fetch("https://vsoft.onrender.com/auth/logout", {
+      method: "POST",
+      credentials: "include",
+    });
 
-        const data = await res.json();
-        alert(data.message);
+    const data = await res.json();
+    alert(data.message);
 
-        localStorage.removeItem("user");
-        localStorage.removeItem("isLoggedIn");
+    // Clear session
+    localStorage.removeItem("user");
+    localStorage.removeItem("isLoggedIn");
 
-        logout.style.display = "none";
+    checkLoginStatus();
 
-        // redirect to login page
-        window.location.href = "login.html";
-    } catch (err) {
-        alert(err.message);
-    }
+    // Redirect to login page
+    window.location.href = "login.html";
+  } catch (err) {
+    alert("Logout failed: " + err.message);
+  }
 });
+
+

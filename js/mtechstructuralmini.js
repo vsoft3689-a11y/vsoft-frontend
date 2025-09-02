@@ -1,59 +1,54 @@
-// Register Modal (if needed)
-const modal = document.getElementById("registerModal");
-const btn = document.getElementById("registerBtn");
-const span = document.getElementById("closeModal");
-const form = document.getElementById("registerForm");
-const success = document.getElementById("registerSuccess");
+// Select elements
+const loginBtn = document.querySelector(".login-btn");
+const logoutBtn = document.querySelector(".logout");
 
-if (btn) btn.onclick = () => modal.style.display = "flex";
-if (span) span.onclick = () => modal.style.display = "none";
-window.onclick = e => { if (e.target === modal) modal.style.display = "none"; }
+// Check login status on page load
+function checkLoginStatus() {
+  const isLoggedIn = localStorage.getItem("isLoggedIn");
 
-if (form) {
-    form.onsubmit = (e) => {
-        e.preventDefault();
-        success.style.display = "block";
-        setTimeout(() => {
-            modal.style.display = "none";
-            form.reset();
-            success.style.display = "none";
-        }, 2000);
-    };
+  if (isLoggedIn) {
+    // User logged in
+    loginBtn.style.display = "none";
+    logoutBtn.style.display = "block";
+  } else {
+    // User logged out
+    loginBtn.style.display = "block";
+    logoutBtn.style.display = "none";
+  }
+}
+checkLoginStatus();
+
+// Call this after successful login API response
+function handleLogin(userData) {
+  localStorage.setItem("isLoggedIn", "true");
+  localStorage.setItem("user", JSON.stringify(userData));
+
+  // Redirect to home page after login
+  window.location.href = "index.html";
 }
 
 // Logout functionality
-const registerbtn = document.querySelector(".register-btn");
-const loginbtn = document.querySelector(".login-btn");
-const logout = document.querySelector(".logout");
-
-let exists = localStorage.getItem("isLoggedIn");
-
-if (exists) {
-    registerbtn.style.display = "none";
-    loginbtn.style.display = "none";
-    logout.style.display = "block";
-}
-
-if (logout) {
-    logout.addEventListener("click", async () => {
-        try {
-            const res = await fetch("https://vsoft.onrender.com/auth/logout", {
-                method: "POST",
-                credentials: "include",
-            });
-
-            const data = await res.json();
-            alert(data.message);
-
-            localStorage.removeItem("user");
-            localStorage.removeItem("isLoggedIn");
-
-            logout.style.display = "none";
-
-            // redirect to login page
-            window.location.href = "login.html";
-        } catch (err) {
-            alert(err.message);
-        }
+logoutBtn.addEventListener("click", async () => {
+  try {
+    const res = await fetch("https://vsoft.onrender.com/auth/logout", {
+      method: "POST",
+      credentials: "include",
     });
-}
+
+    const data = await res.json();
+    alert(data.message);
+
+    // Clear session
+    localStorage.removeItem("user");
+    localStorage.removeItem("isLoggedIn");
+
+    checkLoginStatus();
+
+    // Redirect to login page
+    window.location.href = "login.html";
+  } catch (err) {
+    alert("Logout failed: " + err.message);
+  }
+});
+
+
